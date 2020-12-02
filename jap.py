@@ -93,7 +93,7 @@ class Japanese:
         self.button3.config(width=7, height=1)
         self.button3.place(relx=0.137, rely=0.04)
 
-        self.button4 = tkinter.Button(self.window, width=10, command=self.new_window, bg='lavender blush', relief='flat', state='normal')  # disabled
+        self.button4 = tkinter.Button(self.window, width=10, command=self.new_window, bg='lavender blush', relief='flat', state='disabled')
         self.button4.config(width=11, height=2)
         self.button4.place(relx=0.8, rely=0.23)
 
@@ -119,26 +119,39 @@ class Japanese:
         idx = int(num[0]) - 1
         try:
             if(self.count<len(worng[self.total-1])):
-                self.count+=1
-                self.new_label3.config(text=f"{hiragana1[worng[idx][self.count]]}", fg="red")
-                self.new_label4.config(text=f"{worng[idx][self.count]}", fg="red")
-                self.new_label6.config(text=f"{idx+1}-{worng_idx[idx][self.count]+1}", fg="red")
-                #print(self.count)
-                #print(hiragana1[worng[idx][self.count]])
-                #print(worng[idx][self.count])
+                if(self.menu==0):
+                    self.count+=1
+                    self.new_label3.config(text=f"{hiragana1[worng[idx][self.count]]}", fg="red")
+                    self.new_label4.config(text=f"{worng[idx][self.count]}", fg="red")
+                    self.new_label6.config(text=f"{idx+1}-{worng_idx[idx][self.count]+1}", fg="red")
+                    print(self.count)
+                    #print(hiragana1[worng[idx][self.count]])
+                    #print(worng[idx][self.count])
+                else:
+                    self.count += 1
+                    self.new_label3.config(text=f"{gatakana1[worng[idx][self.count]]}", fg="red")
+                    self.new_label4.config(text=f"{worng[idx][self.count]}", fg="red")
+                    self.new_label6.config(text=f"{idx + 1}-{worng_idx[idx][self.count]+1}", fg="red")
+                    print(self.count)
         except:
             pass
     def pre_btn(self):
         num = re.findall("\d+", self.combo.get())
         idx = int(num[0]) - 1
         if(self.count>0):
-            self.count -= 1
-            self.new_label3.config(text=f"{hiragana1[worng[idx][self.count]]}", fg="red")
-            self.new_label4.config(text=f"{worng[idx][self.count]}", fg="red")
-            self.new_label6.config(text=f"{idx+1}-{worng_idx[idx][self.count]+1}", fg="red")
-            print(self.count)
-            print(hiragana1[worng[idx][self.count]])
-            print(worng[idx][self.count])
+            if (self.menu == 0):
+                self.count -= 1
+                self.new_label3.config(text=f"{hiragana1[worng[idx][self.count]]}", fg="red")
+                self.new_label4.config(text=f"{worng[idx][self.count]}", fg="red")
+                self.new_label6.config(text=f"{idx+1}-{worng_idx[idx][self.count]+1}", fg="red")
+                print(self.count)
+            else:
+                self.count -= 1
+                self.new_label3.config(text=f"{gatakana1[worng[idx][self.count]]}", fg="red")
+                self.new_label4.config(text=f"{worng[idx][self.count]}", fg="red")
+                self.new_label6.config(text=f"{idx + 1}-{worng_idx[idx][self.count]+1}", fg="red")
+                print(self.count)
+
     def new_window(self):
         self.new_window = tkinter.Toplevel(self.window)
         self.new_window.title("Result")
@@ -177,6 +190,7 @@ class Japanese:
         self.new_label6.place(relx=0.72, rely=0.38)
         self.new_label6.config(text=f"{idx+1}-{worng_idx[idx][self.count]+1}", fg="red")
 
+
         self.new_button1 = tkinter.Button(self.new_window, text="▶",bg='lavender blush',command=self.next_btn)
         self.new_button1.config(width=3, height=1)
         self.new_button1.place(relx=0.88, rely=0.74)
@@ -203,7 +217,7 @@ class Japanese:
         idx = int(num[0])-1
         aa = que_list
         bb = my_answer_list
-        self.count = -1
+        self.count = 0
 
         self.new_label2 = tkinter.Label(self.new_window, width=28, height=13, anchor='nw', bg='lavender blush')
         self.new_label2.config(font=("Courier", 17))
@@ -211,9 +225,21 @@ class Japanese:
         self.new_label2.config(text=f"{aa[idx][0]}:{bb[idx][0]} {aa[idx][1]}:{bb[idx][1]} {aa[idx][2]}:{bb[idx][2]} {aa[idx][3]}:{bb[idx][3]} {aa[idx][4]}:{bb[idx][4]}\n\n\n{aa[idx][5]}:{bb[idx][5]} {aa[idx][6]}:{bb[idx][6]} {aa[idx][7]}:{bb[idx][7]} {aa[idx][8]}:{bb[idx][8]} {aa[idx][9]}:{bb[idx][9]}\n\n\n{aa[idx][10]}:{bb[idx][10]} {aa[idx][11]}:{bb[idx][11]} {aa[idx][12]}:{bb[idx][12]} {aa[idx][13]}:{bb[idx][13]} {aa[idx][14]}:{bb[idx][14]}\n\n\n{aa[idx][15]}:{bb[idx][15]} {aa[idx][16]}:{bb[idx][16]} {aa[idx][17]}:{bb[idx][17]} {aa[idx][18]}:{bb[idx][18]} {aa[idx][19]}:{bb[idx][19]}")
         self.new_label2.place(relx=0.06, rely=0.1)
 
-        self.new_label3.config(text=f"{hiragana1[worng[idx][self.count]]}", fg="red")
-        self.new_label4.config(text=f"{worng[idx][self.count]}", fg="red")
-        self.new_label6.config(text=f"{idx + 1}-{worng_idx[idx][self.count]+1}", fg="red")
+        print(worng_idx)
+
+        if(self.menu == 0):
+            self.new_label3.config(text=f"{hiragana1[worng[idx][self.count]]}", fg="red")
+            self.new_label4.config(text=f"{worng[idx][self.count]}", fg="red")
+            self.new_label6.config(text=f"{idx + 1}-{worng_idx[idx][self.count]+1}", fg="red")
+            print(self.count)
+
+        else:
+            self.new_label3.config(text=f"{gatakana1[worng[idx][self.count]]}", fg="red")
+            self.new_label4.config(text=f"{worng[idx][self.count]}", fg="red")
+            self.new_label6.config(text=f"{idx + 1}-{worng_idx[idx][self.count]+1}", fg="red")
+            print(self.count)
+
+
 
     def pgbar(self):
         max = 20
@@ -267,20 +293,24 @@ class Japanese:
             temp_que_list.append(gatakana[rand])
             self.label1.config(text=f'{gatakana[rand]}')
 
+        self.label3.config(text=f"{self.cnt+1}")
         self.button4.config(text='', state='disabled',relief="flat")
         self.label4.config(text=f"")
         self.entry.config(state='normal')
         self.button1.config(state='disabled')
 
     def entry_event(self, event):
+        print("cnt = ", self.cnt)
         if (self.cnt < 20):
             if (self.menu == 0):
                 try:
                     self.word = tkinter.Entry.get(self.entry)
                     temp_my_answer_list.append(self.word)
                     self.hiragana_check()
-                    self.label3.config(text=f'{self.cnt}')
                     self.stopped = True
+                    if (self.cnt < 20):
+                        self.label3.config(text=f'{self.cnt + 1}')
+
                 except:
                     pass
 
@@ -289,17 +319,19 @@ class Japanese:
                     self.word = tkinter.Entry.get(self.entry)
                     temp_my_answer_list.append(self.word)
                     self.gatakana_check()
-                    self.label3.config(text=f'{self.cnt}')
+                    self.label3.config(text=f'{self.cnt+1}')
                     self.stopped = True
+                    if (self.cnt < 20):
+                        self.label3.config(text=f'{self.cnt+1}')
 
                 except:
                     pass
-        print(temp_que_list,len(temp_que_list))
-        print(temp_my_answer_list, len(temp_my_answer_list))
-        print(temp_hi_list, len(temp_hi_list))
-        print(temp_worng)
-        print(temp_worng_idx)
-        print("cnt = ", self.cnt)
+        #print(temp_que_list,len(temp_que_list))
+        #print(temp_my_answer_list, len(temp_my_answer_list))
+        #print(temp_hi_list, len(temp_hi_list))
+        #print(temp_worng)
+        #print(worng)
+
         self.entry.delete(0, "end")
 
     def hiragana_check(self):
@@ -325,9 +357,10 @@ class Japanese:
                 del temp_hi_list[-1]
                 self.trans = 0
         else:
-            temp_worng.append(koriana[temp_hi_list[-1]])
+            if(self.cnt < 20):
+                temp_worng.append(koriana[temp_hi_list[-1]])
             self.cnt += 1
-            self.label3.config(text=f'{self.cnt}')
+            self.label3.config(text=f'{self.cnt+1}')
 
         while self.hi_rand in temp_hi_list:  # 같은 글자가 안나오게 해주는 코드
             self.hi_rand = random.randint(0, 45)
@@ -348,7 +381,9 @@ class Japanese:
 
             for i in temp_worng:
                 temp_worng_idx.append(temp_que_list.index(hiragana1[i]))
-            worng_idx.append(temp_worng_idx)
+            worng_idx.append(temp_worng_idx[:])
+            temp_worng_idx.clear()
+
 
             if (self.cnt == 20):
                 hi_rand_list.append(temp_hi_list[:])
@@ -363,7 +398,7 @@ class Japanese:
                 #print(hi_rand_list)
                 #print(que_list)
                 #print(my_answer_list)
-                #print(self.total)
+                #print(self.total)ㅁ
 
 
 
@@ -378,27 +413,29 @@ class Japanese:
                     winsound.Beep(100, 50)
 
                 else:
-                    temp_worng.append(self.ga_rand)
                     self.cnt += 1
+                    temp_worng.append(kotakana[temp_ga_list[-1]])
                     winsound.Beep(120, 150)
             else:
-                temp_worng.append(self.ga_rand)
+                temp_worng.append(kotakana[temp_ga_list[-1]])
                 self.cnt += 1
                 winsound.Beep(120, 150)
+
             if (self.trans == 2):
                 del temp_ga_list[-1]
                 self.trans = 0
 
         else:
-            temp_worng.append(self.ga_rand)
+            if (self.cnt<20):
+                temp_worng.append(kotakana[temp_ga_list[-1]])
             self.cnt += 1
-            self.label3.config(text=f'{self.cnt}')
+            self.label3.config(text=f'{self.cnt+1}')
 
         while self.ga_rand in temp_ga_list:
             self.ga_rand = random.randint(0, 45)
-        temp_ga_list.append(self.ga_rand)
 
         if (self.cnt < 20):
+            temp_ga_list.append(self.ga_rand)
             self.label1.config(text=f'{gatakana[temp_ga_list[-1]]}')
             temp_que_list.append(gatakana[self.ga_rand])
             self.on_time = True
@@ -412,8 +449,9 @@ class Japanese:
             self.total += 1
 
             for i in temp_worng:
-                temp_worng_idx.append(temp_que_list.index(hiragana1[i]))
-            worng_idx.append(temp_worng_idx)
+                temp_worng_idx.append(temp_que_list.index(gatakana1[i]))
+            worng_idx.append(temp_worng_idx[:])
+            temp_worng_idx.clear()
 
             if (self.cnt == 20):
                 ga_rand_list.append(temp_ga_list[:])
