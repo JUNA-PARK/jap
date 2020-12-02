@@ -46,6 +46,7 @@ que_list = []; temp_que_list = []
 my_answer_list = []; temp_my_answer_list = []
 
 worng = []; temp_worng = []
+worng_idx = []; temp_worng_idx = []
 
 class Japanese:
     def __init__(self):
@@ -121,7 +122,7 @@ class Japanese:
                 self.count+=1
                 self.new_label3.config(text=f"{hiragana1[worng[idx][self.count]]}", fg="red")
                 self.new_label4.config(text=f"{worng[idx][self.count]}", fg="red")
-                self.new_label6.config(text=f"{idx+1}-{self.count+1}", fg="red")
+                self.new_label6.config(text=f"{idx+1}-{worng_idx[idx][self.count]+1}", fg="red")
                 #print(self.count)
                 #print(hiragana1[worng[idx][self.count]])
                 #print(worng[idx][self.count])
@@ -134,7 +135,7 @@ class Japanese:
             self.count -= 1
             self.new_label3.config(text=f"{hiragana1[worng[idx][self.count]]}", fg="red")
             self.new_label4.config(text=f"{worng[idx][self.count]}", fg="red")
-            self.new_label6.config(text=f"{idx+1}-{self.count+1}", fg="red")
+            self.new_label6.config(text=f"{idx+1}-{worng_idx[idx][self.count]+1}", fg="red")
             print(self.count)
             print(hiragana1[worng[idx][self.count]])
             print(worng[idx][self.count])
@@ -174,7 +175,7 @@ class Japanese:
         self.new_label6 = tkinter.Label(self.new_window, width=4, height=1, bg='lavender blush')
         self.new_label6.config(font=("Courier", 9))
         self.new_label6.place(relx=0.72, rely=0.38)
-        self.new_label6.config(text=f"{idx+1}-{self.count+1}", fg="red")
+        self.new_label6.config(text=f"{idx+1}-{worng_idx[idx][self.count]+1}", fg="red")
 
         self.new_button1 = tkinter.Button(self.new_window, text="▶",bg='lavender blush',command=self.next_btn)
         self.new_button1.config(width=3, height=1)
@@ -212,7 +213,7 @@ class Japanese:
 
         self.new_label3.config(text=f"{hiragana1[worng[idx][self.count]]}", fg="red")
         self.new_label4.config(text=f"{worng[idx][self.count]}", fg="red")
-        self.new_label6.config(text=f"{idx + 1}-{self.count + 2}", fg="red")
+        self.new_label6.config(text=f"{idx + 1}-{worng_idx[idx][self.count]+1}", fg="red")
 
     def pgbar(self):
         max = 20
@@ -293,10 +294,12 @@ class Japanese:
 
                 except:
                     pass
-        #print(temp_que_list,len(temp_que_list))
-        #print(temp_my_answer_list, len(temp_my_answer_list))
-        #print(temp_hi_list, len(temp_hi_list))
-        #print("cnt = ", self.cnt)
+        print(temp_que_list,len(temp_que_list))
+        print(temp_my_answer_list, len(temp_my_answer_list))
+        print(temp_hi_list, len(temp_hi_list))
+        print(temp_worng)
+        print(temp_worng_idx)
+        print("cnt = ", self.cnt)
         self.entry.delete(0, "end")
 
     def hiragana_check(self):
@@ -342,6 +345,11 @@ class Japanese:
             self.entry.config(state='disabled')
             self.button4.config(text='Result', state='normal', relief='solid')
             self.total += 1
+
+            for i in temp_worng:
+                temp_worng_idx.append(temp_que_list.index(hiragana1[i]))
+            worng_idx.append(temp_worng_idx)
+
             if (self.cnt == 20):
                 hi_rand_list.append(temp_hi_list[:])
                 que_list.append(temp_que_list[:])
@@ -351,6 +359,7 @@ class Japanese:
                 temp_que_list.clear()
                 temp_my_answer_list.clear()
                 temp_worng.clear()
+
                 #print(hi_rand_list)
                 #print(que_list)
                 #print(my_answer_list)
@@ -401,6 +410,11 @@ class Japanese:
             self.entry.config(state='disabled')
             self.button4.config(text='Result', state='normal', relief='solid')
             self.total += 1
+
+            for i in temp_worng:
+                temp_worng_idx.append(temp_que_list.index(hiragana1[i]))
+            worng_idx.append(temp_worng_idx)
+
             if (self.cnt == 20):
                 ga_rand_list.append(temp_ga_list[:])
                 que_list.append(temp_que_list[:])
