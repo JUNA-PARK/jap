@@ -124,15 +124,14 @@ class Japanese:
                     self.new_label3.config(text=f"{hiragana1[worng[idx][self.count]]}", fg="red")
                     self.new_label4.config(text=f"{worng[idx][self.count]}", fg="red")
                     self.new_label6.config(text=f"{idx+1}-{worng_idx[idx][self.count]+1}", fg="red")
-                    print(self.count)
                     #print(hiragana1[worng[idx][self.count]])
                     #print(worng[idx][self.count])
+
                 else:
                     self.count += 1
                     self.new_label3.config(text=f"{gatakana1[worng[idx][self.count]]}", fg="red")
                     self.new_label4.config(text=f"{worng[idx][self.count]}", fg="red")
                     self.new_label6.config(text=f"{idx + 1}-{worng_idx[idx][self.count]+1}", fg="red")
-                    print(self.count)
         except:
             pass
     def pre_btn(self):
@@ -144,13 +143,11 @@ class Japanese:
                 self.new_label3.config(text=f"{hiragana1[worng[idx][self.count]]}", fg="red")
                 self.new_label4.config(text=f"{worng[idx][self.count]}", fg="red")
                 self.new_label6.config(text=f"{idx+1}-{worng_idx[idx][self.count]+1}", fg="red")
-                print(self.count)
             else:
                 self.count -= 1
                 self.new_label3.config(text=f"{gatakana1[worng[idx][self.count]]}", fg="red")
                 self.new_label4.config(text=f"{worng[idx][self.count]}", fg="red")
                 self.new_label6.config(text=f"{idx + 1}-{worng_idx[idx][self.count]+1}", fg="red")
-                print(self.count)
 
     def new_window(self):
         self.new_window = tkinter.Toplevel(self.window)
@@ -225,19 +222,15 @@ class Japanese:
         self.new_label2.config(text=f"{aa[idx][0]}:{bb[idx][0]} {aa[idx][1]}:{bb[idx][1]} {aa[idx][2]}:{bb[idx][2]} {aa[idx][3]}:{bb[idx][3]} {aa[idx][4]}:{bb[idx][4]}\n\n\n{aa[idx][5]}:{bb[idx][5]} {aa[idx][6]}:{bb[idx][6]} {aa[idx][7]}:{bb[idx][7]} {aa[idx][8]}:{bb[idx][8]} {aa[idx][9]}:{bb[idx][9]}\n\n\n{aa[idx][10]}:{bb[idx][10]} {aa[idx][11]}:{bb[idx][11]} {aa[idx][12]}:{bb[idx][12]} {aa[idx][13]}:{bb[idx][13]} {aa[idx][14]}:{bb[idx][14]}\n\n\n{aa[idx][15]}:{bb[idx][15]} {aa[idx][16]}:{bb[idx][16]} {aa[idx][17]}:{bb[idx][17]} {aa[idx][18]}:{bb[idx][18]} {aa[idx][19]}:{bb[idx][19]}")
         self.new_label2.place(relx=0.06, rely=0.1)
 
-        print(worng_idx)
-
         if(self.menu == 0):
             self.new_label3.config(text=f"{hiragana1[worng[idx][self.count]]}", fg="red")
             self.new_label4.config(text=f"{worng[idx][self.count]}", fg="red")
             self.new_label6.config(text=f"{idx + 1}-{worng_idx[idx][self.count]+1}", fg="red")
-            print(self.count)
 
         else:
             self.new_label3.config(text=f"{gatakana1[worng[idx][self.count]]}", fg="red")
             self.new_label4.config(text=f"{worng[idx][self.count]}", fg="red")
             self.new_label6.config(text=f"{idx + 1}-{worng_idx[idx][self.count]+1}", fg="red")
-            print(self.count)
 
 
 
@@ -300,7 +293,6 @@ class Japanese:
         self.button1.config(state='disabled')
 
     def entry_event(self, event):
-        print("cnt = ", self.cnt)
         if (self.cnt < 20):
             if (self.menu == 0):
                 try:
@@ -319,7 +311,6 @@ class Japanese:
                     self.word = tkinter.Entry.get(self.entry)
                     temp_my_answer_list.append(self.word)
                     self.gatakana_check()
-                    self.label3.config(text=f'{self.cnt+1}')
                     self.stopped = True
                     if (self.cnt < 20):
                         self.label3.config(text=f'{self.cnt+1}')
